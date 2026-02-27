@@ -9,8 +9,8 @@
     <style>
         /* Modern Dark Mode Theme */
         :root {
-            --bg-color: #0f172a;          /* Biru gelap (Slate 900) */
-            --card-bg: rgba(30, 41, 59, 0.7); /* Transparan Slate 800 */
+            --bg-color: #0f172a;          
+            --card-bg: rgba(30, 41, 59, 0.7); 
             --text-main: #f8fafc;
             --text-dim: #94a3b8;
             --primary: #00f2fe;
@@ -46,7 +46,6 @@
             position: relative;
         }
 
-        /* Garis atas bercahaya pada kontainer */
         .container::before {
             content: '';
             position: absolute;
@@ -89,7 +88,6 @@
             gap: 1.2rem;
         }
 
-        /* Mengubah desain tombol mapel */
         .btn-exam {
             padding: 1.2rem;
             background: rgba(255, 255, 255, 0.03);
@@ -101,10 +99,9 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            cursor: pointer; /* Menambahkan cursor pointer karena menggunakan div */
+            cursor: pointer;
         }
 
-        /* Memberikan warna aksen halus di sebelah kiri */
         #mapel-0 { border-left: 4px solid #f59e0b; } 
         #mapel-1 { border-left: 4px solid #ef4444; } 
         #mapel-2 { border-left: 4px solid #3b82f6; } 
@@ -140,7 +137,6 @@
             color: var(--text-dim);
         }
 
-        /* Efek Hover untuk sesi yang aktif/bisa diklik */
         .btn-exam:hover:not(.disabled) {
             transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.08);
@@ -153,7 +149,6 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
-        /* State ketika belum waktunya */
         .btn-exam.disabled {
             background: var(--disabled-bg) !important;
             border: 1px solid rgba(255, 255, 255, 0.03);
@@ -168,7 +163,6 @@
             color: var(--disabled-text);
         }
         
-        /* State Ujian Aktif Hari Ini */
         .active-now {
             border: 1px solid var(--primary) !important;
             border-left: 4px solid var(--primary) !important;
@@ -216,7 +210,7 @@
     </div>
 
     <div class="exam-list" id="examContainer">
-        <div class="btn-exam" id="mapel-0" data-date="2026-03-02" data-url="https://forms.gle/N5Po2XLZqgRQrdxj7">
+        <div class="btn-exam" id="mapel-0" data-date="2026-03-02" data-test="true" data-url="https://forms.gle/N5Po2XLZqgRQrdxj7">
             <i class="fas fa-balance-scale"></i>
             <div class="btn-content">
                 Pendidikan Pancasila
@@ -240,75 +234,4 @@
             </div>
         </div>
 
-        <div class="btn-exam" id="mapel-3" data-date="2026-03-05" data-url="https://forms.gle/Gnz84Q39ZZs5uQPb8">
-            <i class="fas fa-language"></i>
-            <div class="btn-content">
-                Bahasa Inggris
-                <span class="status-tag" id="status-3">Kamis, 5 Maret</span>
-            </div>
-        </div>
-
-        <div class="btn-exam" id="mapel-4" data-date="2026-03-06" data-url="https://forms.gle/c8QbRSuis5UYL2cp7">
-            <i class="fas fa-map-marked-alt"></i>
-            <div class="btn-content">
-                Bahasa Sunda
-                <span class="status-tag" id="status-4">Jumat, 6 Maret</span>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <i class="fas fa-shield-alt"></i> Ujian akan terbuka sesuai jadwal di tab ini.
-    </footer>
-</div>
-
-<script>
-    function updatePortal() {
-        // Mengambil tanggal hari ini dalam format YYYY-MM-DD
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const todayString = `${year}-${month}-${day}`;
-
-        // Mengambil semua elemen ujian
-        const exams = document.querySelectorAll('.btn-exam');
-
-        exams.forEach((btn, index) => {
-            const targetDate = btn.getAttribute('data-date');
-            const targetUrl = btn.getAttribute('data-url');
-            const statusSpan = document.getElementById(`status-${index}`);
-
-            if (todayString !== targetDate) {
-                // Jika belum waktunya atau sudah lewat
-                btn.classList.add('disabled');
-                btn.onclick = function() { 
-                    alert('Maaf, ujian ini belum dibuka atau jadwalnya sudah lewat.'); 
-                };
-            } else {
-                // Jika jadwalnya adalah hari ini
-                btn.classList.remove('disabled');
-                btn.classList.add('active-now');
-                
-                // Ubah teks status menjadi animasi "Sedang berlangsung"
-                const originalText = statusSpan.innerText;
-                statusSpan.innerHTML = `<span class='live-dot'></span><strong style="color: var(--primary);">Buka Sekarang</strong> (${originalText})`;
-                
-                // Navigasi via JS murni agar membuka di tab yang sama 
-                btn.onclick = function() {
-                    const confirmExam = confirm("Apakah Anda siap memulai ujian ini? Anda akan dialihkan ke halaman soal.");
-                    if(confirmExam){
-                        // window.location.replace digunakan agar siswa tidak menekan tombol 'Back' di browser
-                        window.location.replace(targetUrl); 
-                    }
-                };
-            }
-        });
-    }
-
-    // Jalankan fungsi saat halaman dimuat
-    window.onload = updatePortal;
-</script>
-
-</body>
-</html>
+        <div class="btn-exam" id="mapel-3" data-date="2026-03
