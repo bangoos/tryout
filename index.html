@@ -210,7 +210,7 @@
     </div>
 
     <div class="exam-list" id="examContainer">
-        <div class="btn-exam" id="mapel-0" data-date="2026-03-02" data-test="true" data-url="https://forms.gle/N5Po2XLZqgRQrdxj7">
+        <div class="btn-exam" id="mapel-0" data-date="2026-03-02" data-url="https://forms.gle/N5Po2XLZqgRQrdxj7">
             <i class="fas fa-balance-scale"></i>
             <div class="btn-content">
                 Pendidikan Pancasila
@@ -270,34 +270,26 @@
         exams.forEach((btn, index) => {
             const targetDate = btn.getAttribute('data-date');
             const targetUrl = btn.getAttribute('data-url');
-            const isTestMode = btn.getAttribute('data-test') === 'true'; 
             const statusSpan = document.getElementById(`status-${index}`);
             const originalText = statusSpan.innerText;
 
-            // Logika pengecekan jadwal
-            if (todayString !== targetDate && !isTestMode) {
-                // Jika jadwal belum tiba dan BUKAN dalam mode tes
+            // Logika pengecekan jadwal normal
+            if (todayString !== targetDate) {
+                // Jika jadwal belum tiba
                 btn.classList.add('disabled');
                 btn.onclick = function() { 
                     alert('Maaf, ujian ini belum dibuka atau jadwalnya sudah lewat.'); 
                 };
             } else {
-                // Jika jadwal hari ini ATAU dalam mode tes
+                // Jika jadwal hari ini 
                 btn.classList.remove('disabled');
                 btn.classList.add('active-now');
                 
-                if (isTestMode && todayString !== targetDate) {
-                    statusSpan.innerHTML = `<span class='live-dot'></span><strong style="color: #f59e0b;">Mode Uji Coba Aktif</strong>`;
-                } else {
-                    statusSpan.innerHTML = `<span class='live-dot'></span><strong style="color: var(--primary);">Buka Sekarang</strong> (${originalText})`;
-                }
+                statusSpan.innerHTML = `<span class='live-dot'></span><strong style="color: var(--primary);">Buka Sekarang</strong> (${originalText})`;
                 
                 btn.onclick = function() {
-                    const pesan = isTestMode && todayString !== targetDate 
-                        ? "Anda memasuki MODE UJI COBA Pendidikan Pancasila. Lanjutkan ke soal?" 
-                        : "Apakah Anda siap memulai ujian ini?";
+                    const confirmExam = confirm("Apakah Anda siap memulai ujian ini?");
                         
-                    const confirmExam = confirm(pesan);
                     if(confirmExam){
                         // Eksekusi paling aman untuk Exambro: replace URL agar tombol kembali (back) tidak berfungsi
                         window.location.replace(targetUrl); 
