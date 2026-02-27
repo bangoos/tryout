@@ -3,268 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Ujian</title>
+    <title>PSAJ 2026</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS Modern Dark Mode */
+        /* Modern Dark Mode Theme */
         :root {
-            --primary-color: #00f2fe;     
-            --primary-hover: #4facfe;     
-            --bg-color: #0f172a;          
-            --card-bg: #1e293b;           
-            --text-color: #f8fafc;        
-            --text-muted: #cbd5e1;        
-            --card-border: rgba(255, 255, 255, 0.08);
+            --bg-color: #0f172a;          /* Biru gelap (Slate 900) */
+            --card-bg: rgba(30, 41, 59, 0.7); /* Transparan Slate 800 */
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --primary: #00f2fe;
+            --primary-hover: #4facfe;
+            --disabled-bg: rgba(255, 255, 255, 0.03);
+            --disabled-text: #475569;
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-color);
             background-image: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+            background-attachment: fixed;
             margin: 0;
-            padding: 0;
             display: flex;
-            flex-direction: column; /* Ubah ke column agar marquee di atas */
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: var(--text-color);
+            color: var(--text-main);
         }
-
-        /* --- TULISAN BERJALAN (MARQUEE) MODERN --- */
-        .marquee-container {
-            width: 100%;
-            background: linear-gradient(90deg, var(--primary-hover), var(--primary-color));
-            color: #0f172a; /* Teks gelap agar kontras dengan background terang */
-            padding: 10px 0;
-            overflow: hidden;
-            position: fixed; /* Menempel di atas */
-            top: 0;
-            left: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 15px rgba(0, 242, 254, 0.3);
-        }
-
-        .marquee-content {
-            display: inline-block;
-            white-space: nowrap;
-            font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 0.5px;
-            /* Animasi berjalan dari kanan ke kiri */
-            animation: scroll-text 25s linear infinite; 
-        }
-
-        /* Efek hover untuk memberhentikan teks sementara */
-        .marquee-container:hover .marquee-content {
-            animation-play-state: paused;
-        }
-
-        @keyframes scroll-text {
-            0% { transform: translateX(100vw); }
-            100% { transform: translateX(-100%); }
-        }
-        /* ------------------------------------------ */
 
         .container {
-            width: 90%;
-            max-width: 1100px;
-            text-align: center;
-            padding: 80px 0 40px 0; /* Padding top ditambah agar tidak tertutup marquee */
-        }
-
-        header {
-            margin-bottom: 50px;
-        }
-
-        h1 {
-            color: var(--text-color);
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
-            text-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
-        }
-
-        h1 span {
-            color: var(--primary-color);
-        }
-
-        p.subtitle {
-            color: var(--text-muted);
-            font-size: 1.15rem;
-            font-weight: 300;
-        }
-
-        /* Grid Layout */
-        .exam-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        /* Desain Kartu Ujian */
-        .exam-card {
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 30px 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 3.5rem 2rem;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
             position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
-        .exam-card::before {
+        /* Garis atas bercahaya pada kontainer */
+        .container::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
+            background: linear-gradient(90deg, var(--primary), var(--primary-hover));
+            border-radius: 24px 24px 0 0;
         }
 
-        .exam-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.15);
-            border-color: rgba(0, 242, 254, 0.3);
+        .header-section {
+            margin-bottom: 3rem;
         }
 
-        .exam-card:hover::before {
-            opacity: 1;
-        }
-
-        .exam-card h3 {
-            margin-top: 0;
-            font-size: 1.5rem;
-            color: var(--text-color);
-            letter-spacing: 1px;
-        }
-
-        .details {
-            text-align: left;
-            margin: 20px 0 30px 0;
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            flex-grow: 1;
-        }
-
-        .details span {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        h1 { 
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            background: linear-gradient(to right, var(--primary), var(--primary-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
         }
         
-        .details span:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .details strong {
-            color: var(--text-color);
-            margin-left: 8px;
-            margin-right: 5px;
-        }
-
-        /* Tombol Aksi */
-        .btn-start {
-            background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
-            color: #0f172a;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 700;
-            width: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+        h2 { 
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin: 8px 0;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .btn-start:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
+        .exam-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        /* Mengubah desain tombol mapel */
+        .btn-exam {
+            padding: 1.2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer; /* Menambahkan cursor pointer karena menggunakan div */
+        }
+
+        /* Memberikan warna aksen halus di sebelah kiri */
+        #mapel-0 { border-left: 4px solid #f59e0b; } 
+        #mapel-1 { border-left: 4px solid #ef4444; } 
+        #mapel-2 { border-left: 4px solid #3b82f6; } 
+        #mapel-3 { border-left: 4px solid #8b5cf6; } 
+        #mapel-4 { border-left: 4px solid #10b981; } 
+
+        .btn-exam i {
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 12px;
+            margin-right: 1.2rem;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dim);
+            transition: color 0.3s ease;
+        }
+
+        .btn-content {
+            text-align: left;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .status-tag {
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 6px;
+            font-weight: 400;
+            color: var(--text-dim);
+        }
+
+        /* Efek Hover untuk sesi yang aktif/bisa diklik */
+        .btn-exam:hover:not(.disabled) {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-exam:hover:not(.disabled) i {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* State ketika belum waktunya */
+        .btn-exam.disabled {
+            background: var(--disabled-bg) !important;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-left: 4px solid #334155 !important;
+            color: var(--disabled-text);
+            cursor: not-allowed;
+            opacity: 0.7;
+            filter: grayscale(100%);
+        }
+
+        .btn-exam.disabled i {
+            color: var(--disabled-text);
+        }
+        
+        /* State Ujian Aktif Hari Ini */
+        .active-now {
+            border: 1px solid var(--primary) !important;
+            border-left: 4px solid var(--primary) !important;
+            background: rgba(0, 242, 254, 0.05);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+        }
+
+        .active-now i {
+            color: var(--primary);
+            background: rgba(0, 242, 254, 0.1);
+        }
+
+        .live-dot {
+            height: 8px;
+            width: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+            box-shadow: 0 0 8px var(--primary);
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        footer {
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
 <body>
 
-    <div class="marquee-container">
-        <div class="marquee-content">
-            ✨ Selamat menempuh Ujian Try Out! Awali dengan doa, tetap tenang, fokus, dan percayalah pada kemampuan diri sendiri. Kerjakan dengan jujur. Semoga mendapatkan hasil yang terbaik dan sukses selalu! Semangat! ✨
+<div class="container">
+    <div class="header-section">
+        <h1>PSAJ 2026</h1>
+        <h2>SMKS TI MUHAMMADIYAH CIKAMPEK</h2>
+        <h2>Tahun Ajaran 2025/2026</h2>
+    </div>
+
+    <div class="exam-list" id="examContainer">
+        <div class="btn-exam" id="mapel-0" data-date="2026-03-02" data-url="https://forms.gle/N5Po2XLZqgRQrdxj7">
+            <i class="fas fa-balance-scale"></i>
+            <div class="btn-content">
+                Pendidikan Pancasila
+                <span class="status-tag" id="status-0">Senin, 2 Maret</span>
+            </div>
+        </div>
+        
+        <div class="btn-exam" id="mapel-1" data-date="2026-03-03" data-url="https://forms.gle/i868Wzg9W1JWjMvv7">
+            <i class="fas fa-book"></i>
+            <div class="btn-content">
+                Bahasa Indonesia
+                <span class="status-tag" id="status-1">Selasa, 3 Maret</span>
+            </div>
+        </div>
+
+        <div class="btn-exam" id="mapel-2" data-date="2026-03-04" data-url="https://forms.gle/TDLLMqejq9H3hib96">
+            <i class="fas fa-calculator"></i>
+            <div class="btn-content">
+                Matematika
+                <span class="status-tag" id="status-2">Rabu, 4 Maret</span>
+            </div>
+        </div>
+
+        <div class="btn-exam" id="mapel-3" data-date="2026-03-05" data-url="https://forms.gle/Gnz84Q39ZZs5uQPb8">
+            <i class="fas fa-language"></i>
+            <div class="btn-content">
+                Bahasa Inggris
+                <span class="status-tag" id="status-3">Kamis, 5 Maret</span>
+            </div>
+        </div>
+
+        <div class="btn-exam" id="mapel-4" data-date="2026-03-06" data-url="https://forms.gle/c8QbRSuis5UYL2cp7">
+            <i class="fas fa-map-marked-alt"></i>
+            <div class="btn-content">
+                Bahasa Sunda
+                <span class="status-tag" id="status-4">Jumat, 6 Maret</span>
+            </div>
         </div>
     </div>
 
-    <div class="container">
-        <header>
-            <h1>Portal <span>Ujian</span></h1>
-            <p class="subtitle">Halo Agit-! Silakan pilih sesuai sesi ujian Anda 😎</p>
-        </header>
+    <footer>
+        <i class="fas fa-shield-alt"></i> Ujian akan terbuka sesuai jadwal di tab ini.
+    </footer>
+</div>
 
-        <div class="exam-grid">
-            
-            <div class="exam-card">
-                <h3>SESI 1</h3>
-                <div class="details">
-                    <span>📅 <strong>Tanggal:</strong> 23-24 Februari 2026</span>
-                    <span>⏰ <strong>Waktu:</strong> 07.00 - 08.30 WIB</span>
-                    <span>⏳ <strong>Durasi:</strong> 90 Menit</span>
-                </div>
-                <button class="btn-start" onclick="masukUjian('SESI 1', 'https://sites.google.com/view/tryout261/sesi1')">Mulai Ujian</button>
-            </div>
+<script>
+    function updatePortal() {
+        // Mengambil tanggal hari ini dalam format YYYY-MM-DD
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const todayString = `${year}-${month}-${day}`;
 
-            <div class="exam-card">
-                <h3>SESI 2</h3>
-                <div class="details">
-                    <span>📅 <strong>Tanggal:</strong> 23-24 Februari 2026</span>
-                    <span>⏰ <strong>Waktu:</strong> 08.45 - 10.15 WIB</span>
-                    <span>⏳ <strong>Durasi:</strong> 90 Menit</span>
-                </div>
-                <button class="btn-start" onclick="masukUjian('SESI 2', 'https://sites.google.com/view/tryout262/sesi2')">Mulai Ujian</button>
-            </div>
-            
-            <div class="exam-card">
-                <h3>SESI 3</h3>
-                <div class="details">
-                    <span>📅 <strong>Tanggal:</strong> 23-24 Februari 2026</span>
-                    <span>⏰ <strong>Waktu:</strong> 10.30 - 12.00 WIB</span>
-                    <span>⏳ <strong>Durasi:</strong> 90 Menit</span>
-                </div>
-                <button class="btn-start" onclick="masukUjian('SESI 3', 'https://sites.google.com/view/tryout263/sesi3')">Mulai Ujian</button>
-            </div>
-            
-            <div class="exam-card">
-                <h3>SESI 4</h3>
-                <div class="details">
-                    <span>📅 <strong>Tanggal:</strong> 23-24 Februari 2026</span>
-                    <span>⏰ <strong>Waktu:</strong> 13.00 - 14.30 WIB</span>
-                    <span>⏳ <strong>Durasi:</strong> 90 Menit</span>
-                </div>
-                <button class="btn-start" onclick="masukUjian('SESI 4', 'https://sites.google.com/view/tryout264/sesi4')">Mulai Ujian</button>
-            </div>
+        // Mengambil semua elemen ujian
+        const exams = document.querySelectorAll('.btn-exam');
 
-        </div>
-    </div>
+        exams.forEach((btn, index) => {
+            const targetDate = btn.getAttribute('data-date');
+            const targetUrl = btn.getAttribute('data-url');
+            const statusSpan = document.getElementById(`status-${index}`);
 
-    <script>
-        // JavaScript untuk Interaksi
-        function masukUjian(mataPelajaran, linkTujuan) {
-            // Tampilkan konfirmasi sebelum masuk
-            const konfirmasi = confirm(`Apakah Anda siap memulai ujian ${mataPelajaran}?`);
-            
-            if (konfirmasi) {
-                // Mengarahkan ke file/situs ujian
-                window.location.href = linkTujuan; 
+            if (todayString !== targetDate) {
+                // Jika belum waktunya atau sudah lewat
+                btn.classList.add('disabled');
+                btn.onclick = function() { 
+                    alert('Maaf, ujian ini belum dibuka atau jadwalnya sudah lewat.'); 
+                };
+            } else {
+                // Jika jadwalnya adalah hari ini
+                btn.classList.remove('disabled');
+                btn.classList.add('active-now');
+                
+                // Ubah teks status menjadi animasi "Sedang berlangsung"
+                const originalText = statusSpan.innerText;
+                statusSpan.innerHTML = `<span class='live-dot'></span><strong style="color: var(--primary);">Buka Sekarang</strong> (${originalText})`;
+                
+                // Navigasi via JS murni agar membuka di tab yang sama 
+                btn.onclick = function() {
+                    const confirmExam = confirm("Apakah Anda siap memulai ujian ini? Anda akan dialihkan ke halaman soal.");
+                    if(confirmExam){
+                        // window.location.replace digunakan agar siswa tidak menekan tombol 'Back' di browser
+                        window.location.replace(targetUrl); 
+                    }
+                };
             }
-        }
-    </script>
+        });
+    }
+
+    // Jalankan fungsi saat halaman dimuat
+    window.onload = updatePortal;
+</script>
 
 </body>
 </html>
