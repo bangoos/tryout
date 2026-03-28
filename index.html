@@ -1,306 +1,119 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSAJ 2026</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
-    <style>
-        /* Modern Dark Mode Theme */
-        :root {
-            --bg-color: #0f172a;          
-            --card-bg: rgba(30, 41, 59, 0.7); 
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-            --primary: #00f2fe;
-            --primary-hover: #4facfe;
-            --disabled-bg: rgba(255, 255, 255, 0.03);
-            --disabled-text: #475569;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TKA ISMUBA 2026</title>
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-color);
-            background-image: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
-            background-attachment: fixed;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: var(--text-main);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        .container {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 3.5rem 2rem;
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-            position: relative;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-hover));
-            border-radius: 24px 24px 0 0;
-        }
-
-        .header-section {
-            margin-bottom: 3rem;
-        }
-
-        h1 { 
-            font-weight: 800;
-            font-size: 2.2rem;
-            margin: 0 0 10px 0;
-            background: linear-gradient(to right, var(--primary), var(--primary-hover));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 8px;
-            text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
-        }
-        
-        h2 { 
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            font-weight: 400;
-            margin: 8px 0;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .exam-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .btn-exam {
-            padding: 1.2rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        #mapel-0 { border-left: 4px solid #f59e0b; } 
-        #mapel-1 { border-left: 4px solid #ef4444; } 
-        #mapel-2 { border-left: 4px solid #3b82f6; } 
-        #mapel-3 { border-left: 4px solid #8b5cf6; } 
-        #mapel-4 { border-left: 4px solid #10b981; } 
-
-        .btn-exam i {
-            font-size: 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px;
-            border-radius: 12px;
-            margin-right: 1.2rem;
-            width: 25px;
-            height: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-dim);
-            transition: color 0.3s ease;
-        }
-
-        .btn-content {
-            text-align: left;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .status-tag {
-            font-size: 0.8rem;
-            display: block;
-            margin-top: 6px;
-            font-weight: 400;
-            color: var(--text-dim);
-        }
-
-        .btn-exam:hover:not(.disabled) {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-exam:hover:not(.disabled) i {
-            color: var(--text-main);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .btn-exam.disabled {
-            background: var(--disabled-bg) !important;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-left: 4px solid #334155 !important;
-            color: var(--disabled-text);
-            cursor: not-allowed;
-            opacity: 0.7;
-            filter: grayscale(100%);
-        }
-
-        .btn-exam.disabled i {
-            color: var(--disabled-text);
-        }
-        
-        .active-now {
-            border: 1px solid var(--primary) !important;
-            border-left: 4px solid var(--primary) !important;
-            background: rgba(0, 242, 254, 0.05);
-            box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
-        }
-
-        .active-now i {
-            color: var(--primary);
-            background: rgba(0, 242, 254, 0.1);
-        }
-
-        .live-dot {
-            height: 8px;
-            width: 8px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 6px;
-            box-shadow: 0 0 8px var(--primary);
-            animation: blink 1.5s ease-in-out infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.8); }
-        }
-
-        footer {
-            margin-top: 2.5rem;
-            font-size: 0.8rem;
-            color: var(--text-dim);
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-    </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background: linear-gradient(135deg,#020617,#0f172a,#1e3a8a);color:white;min-height:100vh}
+.container{max-width:1000px;margin:auto;padding:20px}
+.header{text-align:center;margin-top:30px}
+.header h1{font-size:2.8rem;background: linear-gradient(90deg,#facc15,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header p{margin-top:10px;opacity:0.8}
+.timer{margin-top:20px;font-size:1.2rem;background:rgba(255,255,255,0.1);display:inline-block;padding:10px 20px;border-radius:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+.card{background:rgba(255,255,255,0.05);backdrop-filter: blur(12px);border-radius:20px;padding:25px;transition:0.3s;border:1px solid rgba(255,255,255,0.1)}
+.card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 20px 40px rgba(0,0,0,0.5)}
+.card h2{color:#facc15;margin-bottom:10px}
+.btn{margin-top:20px;display:inline-block;padding:12px 25px;border-radius:30px;background:linear-gradient(90deg,#facc15,#f59e0b);color:black;font-weight:bold;text-decoration:none;transition:0.3s}
+.btn:hover{transform:scale(1.1);box-shadow:0 10px 25px rgba(250,204,21,0.6)}
+.btn.disabled{background:gray;color:#ccc;pointer-events:none;box-shadow:none}
+.footer{text-align:center;margin-top:60px;padding:30px;background:rgba(255,255,255,0.05);border-radius:20px}
+.footer p{margin:10px 0;opacity:0.9}
+.status{margin-top:10px;font-size:0.9rem;opacity:0.8}
+@media(max-width:768px){.grid{grid-template-columns:1fr}}
+</style>
 </head>
+
 <body>
 
 <div class="container">
-    <div class="header-section">
-        <h1>PSAJ 2026</h1>
-        <h2>SMKS TI MUHAMMADIYAH CIKAMPEK</h2>
-        <h2>Tahun Ajaran 2025/2026</h2>
-    </div>
 
-    <div class="exam-list" id="examContainer">
-        <div class="btn-exam" id="mapel-0" data-date="2026-03-02" data-url="https://forms.gle/N5Po2XLZqgRQrdxj7">
-            <i class="fas fa-balance-scale"></i>
-            <div class="btn-content">
-                Pendidikan Pancasila
-                <span class="status-tag" id="status-0">Senin, 2 Maret</span>
-            </div>
-        </div>
-        
-        <div class="btn-exam" id="mapel-1" data-date="2026-03-03" data-url="https://forms.gle/i868Wzg9W1JWjMvv7">
-            <i class="fas fa-book"></i>
-            <div class="btn-content">
-                Bahasa Indonesia
-                <span class="status-tag" id="status-1">Selasa, 3 Maret</span>
-            </div>
-        </div>
+<div class="header">
+    <h1>Pelaksanaan TKA ISMUBA 2026</h1>
+    <p>Waktu Ujian: <b>06.00 - 21.00 WIB</b></p>
+    <div class="timer" id="timer"></div>
+</div>
 
-        <div class="btn-exam" id="mapel-2" data-date="2026-03-04" data-url="https://forms.gle/TDLLMqejq9H3hib96">
-            <i class="fas fa-calculator"></i>
-            <div class="btn-content">
-                Matematika
-                <span class="status-tag" id="status-2">Rabu, 4 Maret</span>
-            </div>
-        </div>
+<div class="grid">
 
-        <div class="btn-exam" id="mapel-3" data-date="2026-03-05" data-url="https://forms.gle/Gnz84Q39ZZs5uQPb8">
-            <i class="fas fa-language"></i>
-            <div class="btn-content">
-                Bahasa Inggris
-                <span class="status-tag" id="status-3">Kamis, 5 Maret</span>
-            </div>
-        </div>
+<div class="card">
+    <h2>Hari Pertama</h2>
+    <p><b>Senin, 30 Maret 2026</b></p>
+    <a id="btn1" href="https://www.bookwidgets.com/play/1l_rw9Xs-iQAErw65kQAAA/RHWUKRM/ismuba-2026?teacher_id=4857117912596480#currentTab=0" target="_blank" class="btn">Mulai Ujian</a>
+    <div class="status" id="status1"></div>
+</div>
 
-        <div class="btn-exam" id="mapel-4" data-date="2026-03-06" data-url="https://forms.gle/c8QbRSuis5UYL2cp7">
-            <i class="fas fa-map-marked-alt"></i>
-            <div class="btn-content">
-                Bahasa Sunda
-                <span class="status-tag" id="status-4">Jumat, 6 Maret</span>
-            </div>
-        </div>
-    </div>
+<div class="card">
+    <h2>Hari Kedua</h2>
+    <p><b>Selasa, 31 Maret 2026</b></p>
+    <a id="btn2" href="https://www.bookwidgets.com/play/1l_rw9Xs-iQAErw65kQAAA/RHWUKRM/ismuba-2026?teacher_id=4857117912596480#currentTab=0" target="_blank" class="btn">Mulai Ujian</a>
+    <div class="status" id="status2"></div>
+</div>
 
-    <footer>
-        <i class="fas fa-shield-alt"></i> Sistem terintegrasi dengan Exambro Browser.
-    </footer>
+</div>
+
+<div class="footer">
+    <h3>✨ Motivasi ✨</h3>
+    <p>"Kerjakan dengan jujur dan percaya diri."</p>
+    <p>"Setiap usaha hari ini adalah langkah menuju masa depan gemilang."</p>
+    <p><b>Panitia TKA ISMUBA 2026</b></p>
+</div>
+
 </div>
 
 <script>
-    function updatePortal() {
-        // Mengambil tanggal perangkat
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const todayString = `${year}-${month}-${day}`;
+function updateTime(){
+    const now = new Date();
+    document.getElementById("timer").innerHTML = "Waktu Sekarang: " + now.toLocaleString();
 
-        const exams = document.querySelectorAll('.btn-exam');
+    checkAccess(now);
+}
 
-        exams.forEach((btn, index) => {
-            const targetDate = btn.getAttribute('data-date');
-            const targetUrl = btn.getAttribute('data-url');
-            const statusSpan = document.getElementById(`status-${index}`);
-            const originalText = statusSpan.innerText;
+function checkAccess(now){
+    const hour = now.getHours();
 
-            // Logika pengecekan jadwal normal
-            if (todayString !== targetDate) {
-                // Jika jadwal belum tiba
-                btn.classList.add('disabled');
-                btn.onclick = function() { 
-                    alert('Maaf, ujian ini belum dibuka atau jadwalnya sudah lewat.'); 
-                };
-            } else {
-                // Jika jadwal hari ini 
-                btn.classList.remove('disabled');
-                btn.classList.add('active-now');
-                
-                statusSpan.innerHTML = `<span class='live-dot'></span><strong style="color: var(--primary);">Buka Sekarang</strong> (${originalText})`;
-                
-                btn.onclick = function() {
-                    const confirmExam = confirm("Apakah Anda siap memulai ujian ini?");
-                        
-                    if(confirmExam){
-                        // Eksekusi paling aman untuk Exambro: replace URL agar tombol kembali (back) tidak berfungsi
-                        window.location.replace(targetUrl); 
-                    }
-                };
-            }
-        });
+    // tanggal penting
+    const day = now.getDate();
+    const month = now.getMonth(); // 0 = Januari
+    const year = now.getFullYear();
+
+    // konfigurasi hari ujian
+    const day1 = (day === 30 && month === 2 && year === 2026); // 30 Maret 2026
+    const day2 = (day === 31 && month === 2 && year === 2026); // 31 Maret 2026
+
+    const withinTime = (hour >= 6 && hour < 21);
+
+    const btn1 = document.getElementById("btn1");
+    const btn2 = document.getElementById("btn2");
+    const status1 = document.getElementById("status1");
+    const status2 = document.getElementById("status2");
+
+    // Hari 1
+    if(day1 && withinTime){
+        btn1.classList.remove("disabled");
+        status1.innerHTML = "🟢 Ujian Aktif";
+    } else {
+        btn1.classList.add("disabled");
+        status1.innerHTML = "🔴 Belum aktif / sudah ditutup";
     }
 
-    // Jalankan pengecekan portal otomatis saat situs dimuat
-    window.onload = updatePortal;
+    // Hari 2
+    if(day2 && withinTime){
+        btn2.classList.remove("disabled");
+        status2.innerHTML = "🟢 Ujian Aktif";
+    } else {
+        btn2.classList.add("disabled");
+        status2.innerHTML = "🔴 Belum aktif / sudah ditutup";
+    }
+}
+
+setInterval(updateTime,1000);
+updateTime();
 </script>
 
 </body>
