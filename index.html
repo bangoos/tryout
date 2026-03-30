@@ -3,11 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TKA ISMUBA 2026</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, proxy-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 
+<title>TKA ISMUBA 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* Style tetap sama seperti sebelumnya */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 body{background: linear-gradient(135deg,#020617,#0f172a,#1e3a8a);color:white;min-height:100vh}
 .container{max-width:1000px;margin:auto;padding:20px}
@@ -32,87 +36,86 @@ body{background: linear-gradient(135deg,#020617,#0f172a,#1e3a8a);color:white;min
 <body>
 
 <div class="container">
+    <div class="header">
+        <h1>Pelaksanaan TKA ISMUBA 2026</h1>
+        <p>Waktu Ujian: <b>06.00 - 21.00 WIB</b></p>
+        <div class="timer" id="timer"></div>
+    </div>
 
-<div class="header">
-    <h1>Pelaksanaan TKA ISMUBA 2026</h1>
-    <p>Waktu Ujian: <b>06.00 - 21.00 WIB</b></p>
-    <div class="timer" id="timer"></div>
-</div>
+    <div class="grid">
+        <div class="card">
+            <h2>Hari Pertama</h2>
+            <p><b>Senin, 30 Maret 2026</b></p>
+            <a id="btn1" href="https://www.bookwidgets.com/play/1l_rw9Xs-iQAErw65kQAAA/RHWUKRM/ismuba-2026?teacher_id=4857117912596480" class="btn exam-link">Mulai Ujian</a>
+            <div class="status" id="status1"></div>
+        </div>
 
-<div class="grid">
+        <div class="card">
+            <h2>Hari Kedua</h2>
+            <p><b>Selasa, 31 Maret 2026</b></p>
+            <a id="btn2" href="https://www.bookwidgets.com/play/1l_rw9Xs-iQAErw65kQAAA/RHWUKRM/ismuba-2026?teacher_id=4857117912596480" class="btn exam-link">Mulai Ujian</a>
+            <div class="status" id="status2"></div>
+        </div>
+    </div>
 
-<div class="card">
-    <h2>Hari Pertama</h2>
-    <p><b>Senin, 30 Maret 2026</b></p>
-    <a id="btn1" href="https://www.bookwidgets.com/play/1l_rw9Xs-iQAErw65kQAAA/RHWUKRM/ismuba-2026?teacher_id=4857117912596480#currentTab=0" class="btn">Mulai Ujian</a>
-    <div class="status" id="status1"></div>
-</div>
-
-<div class="card">
-    <h2>Hari Kedua</h2>
-    <p><b>Selasa, 31 Maret 2026</b></p>
-    <a id="btn2" href="https://www.bookwidgets.com/play/1l_rw9Xs-iQAErw65kQAAA/RHWUKRM/ismuba-2026?teacher_id=4857117912596480#currentTab=0" class="btn">Mulai Ujian</a>
-    <div class="status" id="status2"></div>
-</div>
-
-</div>
-
-<div class="footer">
-    <h3>✨ Motivasi ✨</h3>
-    <p>"Kerjakan dengan jujur dan percaya diri."</p>
-    <p>"Setiap usaha hari ini adalah langkah menuju masa depan gemilang."</p>
-    <p><b>Panitia TKA ISMUBA 2026</b></p>
-</div>
-
+    <div class="footer">
+        <h3>✨ Motivasi ✨</h3>
+        <p>"Kerjakan dengan jujur dan percaya diri."</p>
+        <p><b>Panitia TKA ISMUBA 2026</b></p>
+    </div>
 </div>
 
 <script>
 function updateTime(){
     const now = new Date();
-    document.getElementById("timer").innerHTML = "Waktu Sekarang: " + now.toLocaleString();
-
+    document.getElementById("timer").innerHTML = "Waktu Sekarang: " + now.toLocaleString('id-ID');
     checkAccess(now);
 }
 
 function checkAccess(now){
     const hour = now.getHours();
-
-    // tanggal penting
     const day = now.getDate();
-    const month = now.getMonth(); // 0 = Januari
+    const month = now.getMonth(); 
     const year = now.getFullYear();
 
-    // konfigurasi hari ujian
-    const day1 = (day === 30 && month === 2 && year === 2026); // 30 Maret 2026
-    const day2 = (day === 31 && month === 2 && year === 2026); // 31 Maret 2026
-
+    const day1 = (day === 30 && month === 2 && year === 2026);
+    const day2 = (day === 31 && month === 2 && year === 2026);
     const withinTime = (hour >= 6 && hour < 21);
 
     const btn1 = document.getElementById("btn1");
     const btn2 = document.getElementById("btn2");
-    const status1 = document.getElementById("status1");
-    const status2 = document.getElementById("status2");
+    
+    if(day1 && withinTime) { btn1.classList.remove("disabled"); document.getElementById("status1").innerHTML = "🟢 Ujian Aktif"; }
+    else { btn1.classList.add("disabled"); document.getElementById("status1").innerHTML = "🔴 Tertutup"; }
 
-    // Hari 1
-    if(day1 && withinTime){
-        btn1.classList.remove("disabled");
-        status1.innerHTML = "🟢 Ujian Aktif";
-    } else {
-        btn1.classList.add("disabled");
-        status1.innerHTML = "🔴 Belum aktif / sudah ditutup";
-    }
-
-    // Hari 2
-    if(day2 && withinTime){
-        btn2.classList.remove("disabled");
-        status2.innerHTML = "🟢 Ujian Aktif";
-    } else {
-        btn2.classList.add("disabled");
-        status2.innerHTML = "🔴 Belum aktif / sudah ditutup";
-    }
+    if(day2 && withinTime) { btn2.classList.remove("disabled"); document.getElementById("status2").innerHTML = "🟢 Ujian Aktif"; }
+    else { btn2.classList.add("disabled"); document.getElementById("status2").innerHTML = "🔴 Tertutup"; }
 }
 
-setInterval(updateTime,1000);
+// LOGIKA PEMBERSIH CACHE & SESI UNTUK EDGE
+document.querySelectorAll('.exam-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // 1. Tambahkan Unique ID (Timestamp) agar Edge menganggap ini request baru
+        const timestamp = new Date().getTime();
+        let finalUrl = this.href;
+        
+        // Tambahkan parameter anti-cache
+        finalUrl += (finalUrl.includes('?') ? '&' : '?') + 'refresh=' + timestamp;
+        
+        // 2. Clear Session Storage browser (jika ada data nyangkut di domain yang sama)
+        try {
+            sessionStorage.clear();
+            localStorage.clear(); // Hati-hati: ini menghapus data lokal jika domainnya sama
+        } catch (e) {}
+
+        // 3. Arahkan ke URL baru di tab yang sama
+        window.location.replace(finalUrl);
+    });
+});
+
+setInterval(updateTime, 1000);
 updateTime();
 </script>
 
